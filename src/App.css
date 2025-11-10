@@ -11,11 +11,14 @@
     box-sizing: border-box;
 }
 
-/* --- Dots (şifre noktaları) için tutarlı boyut değişkenleri --- */
+/* --- Dots (şifre noktaları) için tutarlı boyut & konum değişkenleri --- */
 :root {
     /* rem tabanlı tutarlı boyut; küçük ekranda aşırı olmasın diye clamp */
     --dot-size: clamp(0.9rem, 3.5vw, 1.2rem);   /* ~14px - 19px aralığı */
-    --dot-gap: clamp(0.4rem, 2.5vw, 0.9rem);
+    /* aralığı artırıldı */
+    --dot-gap: clamp(12px, 3.4vw, 20px);
+    /* dot'ları biraz aşağı kaydır */
+    --dot-offset-y: 4px; /* 2–6px arası ince ayar yapabilirsin */
 }
 
 /* Cihazların otomatik metin büyütmesini stabilize et */
@@ -678,7 +681,7 @@ body {
     padding: 0 16px;          /* input iç padding ile hizala */
     pointer-events: none;
     z-index: 2;
-    /* eski top/left/width/height değerleri iptal */
+    transform: translateY(var(--dot-offset-y)); /* dot'ları biraz aşağı al */
 }
 
 .dots {
@@ -705,11 +708,6 @@ body {
     border-radius: 50%;
     background: currentColor;   /* getDotColor ile gelen renk burada kullanılır */
 }
-
-/* -------- Son -------- */
-
-/* Dairelerin eski stilini devre dışı bırakıyoruz (gerekliyse) */
-/* .dot { font-size: 25px; }  <-- kaldırıldı */
 
 /* Action Links (Müşteri Olmak İstiyorum ve Şifre Oluştur) */
 .action-links {
@@ -1261,10 +1259,11 @@ body {
     }
 }
 
-/* Ekstra dar ekranlarda dot’ları biraz daha küçült (opsiyonel) */
+/* Ekstra dar ekranlarda dot’ları ve offset'i biraz azalt (opsiyonel) */
 @media (max-width: 360px) {
     :root {
         --dot-size: clamp(0.8rem, 4vw, 1rem);
-        --dot-gap: clamp(0.3rem, 2vw, 0.7rem);
+        --dot-gap: clamp(10px, 3.6vw, 16px);
+        --dot-offset-y: 3px;
     }
 }
