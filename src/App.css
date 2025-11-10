@@ -14,9 +14,9 @@
 /* --- Dots (şifre noktaları) için tutarlı boyut değişkenleri --- */
 :root {
     /* rem tabanlı tutarlı boyut; küçük ekranda aşırı olmasın diye clamp */
-    /* Öncekine göre çok az küçültüldü */
-    --dot-size: clamp(0.85rem, 3.2vw, 1.1rem);   /* ~13.6px - 17.6px aralığı */
-    --dot-gap: clamp(0.4rem, 2.5vw, 0.9rem);
+    --dot-size: clamp(0.8rem, 3.2vw, 1.05rem);  /* önceye göre az küçültülmüş */
+    --dot-gap: clamp(0.5rem, 2.6vw, 1rem);
+    --dot-offset-y: 0px; /* ilk değer, en sonda override ile aşağı alacağız */
 }
 
 /* Cihazların otomatik metin büyütmesini stabilize et */
@@ -679,6 +679,7 @@ body {
     padding: 0 16px;          /* input iç padding ile hizala */
     pointer-events: none;
     z-index: 2;
+    transform: translateY(var(--dot-offset-y)); /* konumu ince ayar */
     /* eski top/left/width/height değerleri iptal */
 }
 
@@ -707,7 +708,8 @@ body {
     background: currentColor;   /* getDotColor ile gelen renk burada kullanılır */
 }
 
-/* -------- Son -------- */
+/* Dairelerin eski stilini devre dışı bırakıyoruz (gerekliyse) */
+/* .dot { font-size: 25px; }  <-- kaldırıldı */
 
 /* Action Links (Müşteri Olmak İstiyorum ve Şifre Oluştur) */
 .action-links {
@@ -1262,8 +1264,8 @@ body {
 /* Ekstra dar ekranlarda dot’ları biraz daha küçült (opsiyonel) */
 @media (max-width: 360px) {
     :root {
-        --dot-size: clamp(0.8rem, 4vw, 1rem);
-        --dot-gap: clamp(0.3rem, 2vw, 0.7rem);
+        --dot-size: clamp(0.72rem, 4vw, 0.9rem); /* biraz daha küçültüldü */
+        --dot-gap: clamp(0.45rem, 2.8vw, 0.85rem);
     }
 }
 
@@ -1272,13 +1274,14 @@ body {
    (Bu bloğu mevcut CSS'inin EN SONUNA koy)
    ========================= */
 :root {
-  /* Aralığı daha önce artırmıştık, aynı kalsın */
-  --dot-gap: clamp(12px, 3.4vw, 20px);
-  /* Dikey ofset: dotları biraz daha aşağı al (önce 4px idi, 6px yaptık) */
-  --dot-offset-y: 6px; /* 5–7px arası oynatabilirsin */
+  /* Dotları biraz daha küçült ve aralığı artır */
+  --dot-size: clamp(0.78rem, 3vw, 0.98rem);
+  --dot-gap: clamp(14px, 3.8vw, 22px);
+  /* Dikey ofset: dotları biraz daha aşağı al */
+  --dot-offset-y: 6px; /* 4px -> 6px */
 }
 
-/* Dots satırını çok az aşağı kaydır */
+/* Dots satırını aşağı kaydır (ince ayar) */
 .password-overlay {
   transform: translateY(var(--dot-offset-y));
 }
@@ -1286,7 +1289,8 @@ body {
 /* Çok küçük ekranlarda ince ayar (opsiyonel) */
 @media (max-width: 360px) {
   :root {
-    --dot-gap: clamp(10px, 3.6vw, 16px);
+    --dot-size: clamp(0.7rem, 4.2vw, 0.9rem);
+    --dot-gap: clamp(12px, 3.6vw, 18px);
     --dot-offset-y: 5px;
   }
 }
